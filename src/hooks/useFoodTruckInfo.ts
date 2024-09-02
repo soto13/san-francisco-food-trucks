@@ -8,6 +8,8 @@ type useFoodTruckInformationType = {
   total: number;
   hasError: boolean;
   response: { [key: string]: string }[];
+  filterStatus: string;
+  filterByStatus: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const useFoodTruckInformation = (): useFoodTruckInformationType => {
@@ -16,6 +18,8 @@ export const useFoodTruckInformation = (): useFoodTruckInformationType => {
   const [total, setTotal] = useState<number>(0);
   const [hasError, setHasError] = useState<boolean>(false);
   const [response, setResponse] = useState<{ [key: string]: string }[]>([]);
+  const [tempResponse, setTempResponse] = useState<{ [key: string]: string }[]>([]);
+  const [filterStatus, setFilterStatus] = useState<string>('ALL');
 
   useEffect(() => {
     if (!data.length) {
@@ -32,6 +36,16 @@ export const useFoodTruckInformation = (): useFoodTruckInformationType => {
       });
     }
   }, [data, readRemoteFile]);
+
+  useEffect(() => {
+    let dataCopied = [...response];
+
+    if (filterStatus !==  'ALL') {
+      dataCopied = dataCopied.filter(({status}) => status === filterStatus);
+    }
+
+    setTempResponse(dataCopied);
+  }, [filterStatus, response, tempResponse]);
 
   const transformData = (arr: string[][]) => {
     if (arr.length) {
@@ -58,8 +72,9 @@ export const useFoodTruckInformation = (): useFoodTruckInformationType => {
       );
 
       setResponse(updated);
+      setTempResponse(updated);
     }
   };
 
-  return { data, total, hasError, response };
+  return { data, total, hasError, response: tempResponse, filterStatus, filterByStatus: setFilterStatus };
 };

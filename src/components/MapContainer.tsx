@@ -1,35 +1,30 @@
-import 'leaflet/dist/leaflet.css';
+import { FunctionComponent } from 'react';
 
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
-import { FunctionComponent } from 'react';
 import PopupComponent from './Popup';
-import { useMediaQueries } from '@food-app/hooks';
+
+import 'leaflet/dist/leaflet.css';
 
 type MapContainerComponentType = {
   data: { [key: string]: string }[];
   showStatus: boolean;
 };
 
+// San Franciso Position
 const defaultPosition = { lat: 37.7557, lon: -122.4429 };
-
-const MapStyles = {
-  mapMobile: { height: '100%', width: '100%' },
-  mapDesktop: { height: '100%', width: '100%' },
-};
 
 const MapContainerComponent: FunctionComponent<MapContainerComponentType> = ({
   data,
   showStatus = true,
 }) => {
-  const { sm } = useMediaQueries();
 
   return (
     <MapContainer
       center={[defaultPosition.lat, defaultPosition.lon]}
       zoom={13}
       scrollWheelZoom={true}
-      style={sm ? MapStyles.mapMobile : MapStyles.mapDesktop}
+      style={{ height: '100%', width: '100%' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

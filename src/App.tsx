@@ -1,62 +1,46 @@
-import 'leaflet/dist/leaflet.css';
 
-import { useFoodTruckInformation, useMediaQueries } from '@food-app/hooks';
+import { ChangeEvent, useState } from 'react';
 
+import { useFoodTruckInformation } from '@food-app/hooks';
 import { MapContainerComponent } from '@food-app/components';
-import { useState } from 'react';
 
-// I had not time to create classes. Sorry :c
+import 'leaflet/dist/leaflet.css';
+import './App.css';
+
 const AppStyles = {
-  foodTruckContainer: {
-    backgroundColor: '#ecf2ff',
-    height: '100vh',
-    width: '100%',
-    display: 'flex',
-  },
-  leftSidePanel: { margin: '10px', display: 'flex' },
-  button: {
-    border: 'none',
-    color: 'white',
-    padding: '15px 32px',
-    textAlign: 'center',
-    textDecoration: 'none',
-    display: 'inline-block',
-    fontSize: '16px',
-  },
   buttonShow: { backgroundColor: '#e7e7e7', color: 'black' },
   buttonHide: { backgroundColor: '#555555' },
 };
 
 function App() {
-  const { response } = useFoodTruckInformation();
-  const { sm } = useMediaQueries();
+  const { response, filterStatus, filterByStatus } = useFoodTruckInformation();
   const [showStatus, setShowStatus] = useState(false);
 
   const handleStatus = () => setShowStatus(!showStatus);
+  const handleFilterStatus = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => filterByStatus(value);
 
   return (
-    <div
-      style={{
-        ...AppStyles.foodTruckContainer,
-        flexDirection: !sm ? 'column' : 'row',
-      }}
-    >
+    <div className='food-truck-container'>
       <div>
-        <h1 style={{ color: '#008CBA', textAlign: !sm ? 'center' : 'start' }}>
+        <h1 className='food-truck-title'>
           San Francisco Food Trucks!
         </h1>
-        <div
-          style={{
-            ...AppStyles.leftSidePanel,
-            justifyContent: !sm ? 'center' : 'flex-start',
-          }}
-        >
+        <div className='left-side-panel'>
+          <div className="filters filter-select">
+            <label>
+              Select Food Truck Status:
+              <select value={filterStatus} onChange={handleFilterStatus}>
+                <option value="ALL">All</option>
+                <option value="REQUESTED">Requested</option>
+                <option value="APPROVED">Approved</option>
+                <option value="EXPIRED">Expired</option>
+              </select>
+            </label>
+          </div>
+
           <button
-            style={{
-              ...AppStyles.button,
-              textAlign: 'center',
-              ...(showStatus ? AppStyles.buttonHide : AppStyles.buttonShow),
-            }}
+            className={'filters filter-button'}
+            style={showStatus ? AppStyles.buttonHide : AppStyles.buttonShow}
             onClick={handleStatus}
           >
             {showStatus ? 'Hide' : 'Show'} Status
@@ -64,7 +48,7 @@ function App() {
         </div>
       </div>
 
-      <div style={{ width: '100%', height: '100%' }}>
+      <div className='right-side-panel'>
         <MapContainerComponent showStatus={showStatus} data={response} />
       </div>
     </div>

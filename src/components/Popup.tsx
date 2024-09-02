@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 
 import { Popup } from 'react-leaflet';
+
 import StatusComponent from './Status';
 
 const PopupComponentStyle = {

@@ -1,42 +1,78 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.food-truck-container {
+  height: 100vh;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: row;
+
+  background-color: #ecf2ff;
+}
+
+.food-truck-title {
+  color: #008CBA;
+  text-align: start;
+}
+
+.left-side-panel {
+  margin: 10px;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: flex-start;
+
+  gap: 10px;
+}
+
+.right-side-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.filters {
+  border-radius: 0.5px;
+}
+
+.filter-button {
+  color: white;
+  
+  padding: 15px 32px;
+  
+  border: none;
+  display: inline-block;
+  
   text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.filter-select {
+  min-width: 350px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.filter-select select {
+  appearance: none;
+
+  width: 100%;
+  padding: 15px 32px;
+  
+  background-color: #e7e7e7;
+  border: 1px solid #caced1;
+  
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+  .food-truck-container {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .food-truck-title {
+    text-align: center;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  
+  .left-side-panel {
+    justify-content: center;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
