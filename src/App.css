@@ -1,0 +1,78 @@
+.food-truck-container {
+  height: 100vh;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: row;
+
+  background-color: #ecf2ff;
+}
+
+.food-truck-title {
+  color: #008CBA;
+  text-align: start;
+}
+
+.left-side-panel {
+  margin: 10px;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: flex-start;
+
+  gap: 10px;
+}
+
+.right-side-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.filters {
+  border-radius: 0.5px;
+}
+
+.filter-button {
+  color: white;
+  
+  padding: 15px 32px;
+  
+  border: none;
+  display: inline-block;
+  
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.filter-select {
+  min-width: 350px;
+}
+
+.filter-select select {
+  appearance: none;
+
+  width: 100%;
+  padding: 15px 32px;
+  
+  background-color: #e7e7e7;
+  border: 1px solid #caced1;
+  
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+  .food-truck-container {
+    flex-direction: column;
+  }
+  
+  .food-truck-title {
+    text-align: center;
+  }
+  
+  .left-side-panel {
+    justify-content: center;
+  }
+}
