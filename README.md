@@ -1,3 +1,9 @@
+# Steps to run this app
+1. Install node `v18.x.x` (Version used during the develop of this app: `v18.19.1`)
+2. Run `npm run dev`
+3. Open any browser, and paste your localhost + port used (The port used should be displayed in the terminal. E.g: `http://localhost:5173`).
+4. Enjoy using it :).
+
 # Engineering Challenge
 
 We strive to be a practical and pragmatic team. That extends to the way that we work with you to understand if this team is a great fit for you. We want you to come away with a great understanding of the kind of things that we actually do day to day and what it is like to work in our teams.
